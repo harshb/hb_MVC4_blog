@@ -1,0 +1,21 @@
+﻿<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                <li class="active"><a href="/">Harsh Bhasin </a> </li>
+                <li>@Html.ActionLink("About", "About", "Posts")</li>
+                 @if (Request.IsAuthenticated)
+                 {
+                   <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                 }
+            </ul>
+            <p class="navbar-text pull-right">
+            <a type="application/rss+xml" href="@Url.Action("PostFeed", "Posts")">
+           RSS
+            </a>
+             &nbsp; &nbsp;
+               @Html.Partial("_LoginPartial")
+            </p>
+        </div>
+    </div>
+</div>

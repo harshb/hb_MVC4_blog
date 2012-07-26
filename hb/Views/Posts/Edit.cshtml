@@ -1,0 +1,26 @@
+﻿<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Form.HiddenID(Model.id)
+    
+        <div class="span6">
+            @Form.TextBoxRequired(name: "Title", value: Model.title)
+            <br />
+            @Form.TextArea(name: "Body", value: Model.body)
+        </div>
+
+        <div class="span6">
+            @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary" })
+            <br />
+            <br />
+            <br />
+            <br />
+            @Form.TextArea(name: "Summary", value: Model.summary)
+          
+            @Form.Submit()
+        </div>
+
+    }
+</div>
+

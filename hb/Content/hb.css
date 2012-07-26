@@ -1,0 +1,77 @@
+﻿body {
+  padding-top: 60px;
+}
+#Body{
+  width: 400px;
+  height:500px;
+}
+
+ #Summary{
+  width: 400px;
+  height:300px;
+}
+
+.float_right{
+  float:right;
+}
+
+.img_float_left{
+ float:left;
+ margin: 10px;
+
+}
+
+.img_float_right{
+ float:right;
+ margin: 10px;
+
+}
+.errors{color:red;}
+
+.clear
+{
+clear:both;
+}
+
+hr {
+    border: none;
+    background-color: #ccc;
+      color: #ccc;
+      height: 1px;
+  }
+
+  p.contentspacer
+  {
+  min-height:100px;
+  }
+
+
+/* ----------styles for  footer layout  start------------*/
+  html,body
+  {
+      height:100%;
+  }
+
+  #wrap
+  {
+    min-height: 100%;
+  }
+
+  #main
+  {
+      overflow:auto;
+      padding-bottom:150px; /* this needs to be bigger than footer height*/
+  }
+
+  .footer
+  {
+    position: relative;
+    margin-top: -150px; /* negative value of footer height */
+    height: 200px;
+    clear:both;
+    padding-top:20px;
+
+  }
+
+
+  /* ------------styles for  footer layout  end -------------------*/

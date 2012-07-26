@@ -1,0 +1,5 @@
+touch README.md
+git init
+git commit -a -m "first commit"
+git remote add origin https://github.com/harshb/hb_MVC4_blog.git
+git push -u origin master

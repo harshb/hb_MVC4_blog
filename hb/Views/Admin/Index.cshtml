@@ -1,0 +1,168 @@
+﻿
+<script type="text/JavaScript">
+    function postModel() {
+        var self = this;
+        self.posts = ko.observable();
+        self.post = ko.observable();
+        self.postName = ko.observable("test");
+
+
+
+        //--get posts------
+        self.getposts = function () {
+
+
+
+
+            //hack to get i.e to work :pass in ?breakcache='+Math.random() 
+            //as querystring --otherwise i,e responds with 304:nothings changed
+
+            $.get('/Admin/GetPosts' + '?breakcache=' + Math.random(), function (data) {
+
+                self.posts(data);
+            });
+
+
+        };
+
+
+        //---get posts end---
+
+        //--details start
+
+        self.getdetails = function (_post) {
+
+
+            self.post(_post);
+        };
+
+        //--details end
+
+        //---save------
+
+        self.save = function (_post) {
+
+            var jsonData = ko.toJSON(_post);
+
+            var url = '/Admin/SavePost';
+
+            
+
+            $.post(url, jsonData, function (data) {
+
+                self.posts([]);
+                $.get('/Admin/GetPosts', self.posts);
+            });
+        };
+
+        //---save end
+
+
+        //---delete------
+
+        self.deleterecord = function (_post) {
+
+            var jsonData = ko.toJSON(_post);
+
+            //  var jsonData = "'{id:" +  _post.id + "}'";
+
+
+            var url = '/Admin/DeletePost';
+
+
+
+            $.post(url, jsonData, function (data) {
+
+                self.posts([]);
+                $.get('/Admin/GetPosts', self.posts);
+                self.newrecord();
+            });
+        };
+
+        //---delete end
+
+
+        //---save------
+
+        self.newrecord = function () {
+
+            var newpost = {
+
+                id: "0",
+                title: "",
+                summary: "",
+                body: ""
+            };
+
+
+            self.post(newpost);
+        };
+
+        //---save end
+
+        //init
+
+        self.getposts();
+        self.newrecord();
+    };
+
+</script>
+
+
+<h1> Admin Page </h1>
+
+<strong>This page makes use of the  <a href="http://knockoutjs.com/"> KnockoutJs</a> library, REST and JQuery</strong>
+ <br />
+<div class="row">
+    <div class="span6">
+    <br />
+        <table>
+            <tbody data-bind="foreach: posts">
+                <tr>
+                    <td>
+                        <h2><a href="" data-bind="text: title,  click: $root.getdetails"></a> </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-bind="text: summary">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="span6 ">
+       
+   
+        
+       
+         <button data-bind="click: newrecord" class="btn btn-primary float_right"> New</button>
+
+        <div data-bind="with: post">
+
+         
+            <h3 data-bind="text: title">
+            
+            </h3>
+             <input type="hidden"  data-bind="value: id" /><hr />
+            Title: <br />
+                 
+            <input data-bind="value: title" /> <br />
+                  
+            Summary: <br />
+                   
+            <textarea style="height: 150px; width: 450px;" data-bind="value: summary"> </textarea> <br />
+
+             Body: <br />
+                   
+            <textarea style="height: 250px; width: 450px;"  data-bind="value: body"> </textarea> <br />
+                  
+            <button data-bind="click: $root.save" class="btn btn-primary float_right">  Save</button>
+
+            <button data-bind="click: $root.deleterecord" class="btn btn-primary float_left"> Delete </button>
+                  
+        </div>
+    </div>
+</div>
+<script>
+    ko.applyBindings(new postModel());
+</script>

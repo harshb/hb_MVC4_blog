@@ -1,0 +1,35 @@
+﻿
+@{
+    Response.ContentType = "application/rss+xml";
+    Layout = "";
+}
+        
+<rss version="2.0">
+    <channel>
+        <title>Harsh Bhasin's Blog</title>
+        <link>@Url.Action("Index", "Posts", null, "http")</link>
+        <description>The Blog RSS feed</description>
+        <copyright></copyright>
+        <lastBuildDate> @DateTime.Now</lastBuildDate>
+         <generator>Super Simple RSS</generator>
+        <webMaster></webMaster>
+        <language>en-us</language>
+ 
+        @foreach (var p in Model)
+        {
+            <item>
+                <title>@p.title</title>
+                <link>@Url.Action("Details", "Posts", new {id = p.id}, "http")</link>
+                <guid>@Url.Action("Details", "Posts", new { id = p.id }, "http")</guid>
+                <pubDate>@p.created_at.ToString("r")</pubDate>
+                <description>
+                    @(p.summary +
+                        @Html.ActionLink("Read More...", "Post", "Home", new {id = p.id}, null))
+                </description>
+            </item>
+        }
+ 
+    </channel>
+</rss>
+
+

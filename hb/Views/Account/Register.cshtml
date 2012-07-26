@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Create a New Account</h2>
+<p>
+    Use the form below to create a new account. 
+</p>
+<p>
+    Passwords are required to be a minimum of 6 characters in length.
+</p>
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
+    <div>
+        <fieldset>
+            <legend>Account Information</legend>
+
+            
+            <div >
+           
+                @Form.TextBoxRequired("Email")
+
+            </div>
+
+             <div >
+           
+                 @Form.PasswordRequired("Password")
+
+            </div>
+           
+             <div >
+           
+                 @Form.PasswordRequired("Confirm")
+
+            </div>
+            
+            <p>
+                <input type="submit" value="Register" />
+            </p>
+        </fieldset>
+    </div>
+}
+
+@*
+ @Form.TextBoxRequired("Title",Model.Title)
+        @Form.TextArea("Description",Model.Description)
+        @Form.TextBoxNumber("Price", Model.Price)
+        @Form.Submit()*@

@@ -1,0 +1,13 @@
+﻿ @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary" })
+@foreach (var item in Model)
+{
+         <br />
+        <h1>@item.title </h1>
+         <br />
+      
+      
+                                     
+          @Html.Raw(@item.body)
+
+     
+}

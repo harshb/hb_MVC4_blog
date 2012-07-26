@@ -1,0 +1,51 @@
+﻿@{
+    //ViewBag.Title = "Index";
+}
+
+
+
+<div class="row">
+
+ <div class="span10">
+
+  @if(Request.IsAuthenticated)
+    {
+    
+        @Html.ActionLink("Create New", "Create",null, new { @class= "btn btn-primary"})
+   
+    }
+</div>
+  
+@foreach (var item in Model)
+{
+ 
+    <div class="span10">
+      <br />
+       <h1>
+         @Html.ActionLink((string)item.title, "Details", new { id = item.id }) 
+       </h1>
+     </div>   
+    if (Request.IsAuthenticated)
+    {   
+    
+         <div class="span2">  
+         <br /> <br />   
+            @Html.ActionLink("Edit", "edit", new { id = item.id }) 
+            @Html.ActionLink("Delete", "delete", new { id = item.id })
+          </div>
+     }
+     
+   <div class="span8">
+    <br />
+      @Html.Raw(@item.summary)
+   </div>
+}
+
+
+</div>
+
+
+
+
+
+
